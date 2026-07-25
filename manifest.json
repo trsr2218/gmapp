@@ -1,0 +1,26 @@
+{
+  "name": "Guardian Motors Limited",
+  "short_name": "Guardian Motors",
+  "description": "Zambia's authorised Suzuki & Maruti Suzuki distributor since 1969: showroom, workshop bookings and genuine parts.",
+  "start_url": "/?source=pwa",
+  "id": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0b0c",
+  "theme_color": "#0b0b0c",
+  "lang": "en-ZM",
+  "categories": ["business", "shopping", "automotive"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Book a Service", "url": "/workshop.html#booking", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Browse Showroom", "url": "/showroom.html", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Order Parts", "url": "/parts.html", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Enquiry Cart", "url": "/cart.html", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
