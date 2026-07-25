@@ -7,6 +7,7 @@ const path = require('path');
 const { VEHICLES, PART_CATEGORIES, PARTS } = require('../js/data.js');
 
 const ROOT = path.join(__dirname, '..');
+const OUT_DIR = path.join(ROOT, 'dist');
 const SITE = 'https://www.guardianmotors.co.zm';
 
 /* Google Analytics 4. Create a free GA4 property at https://analytics.google.com,
@@ -301,4 +302,4 @@ const FAQS = [
   { q: 'Can I save vehicles to look at later?', tags: 'general,sales', a: 'Yes. Tap the heart icon on any vehicle to save it to your wishlist, or "Add to Enquiry" to build a list to send our sales team in one message. Find both on the <a href="/cart.html">enquiry cart</a> page.' },
 ];
 
-module.exports = { ROOT, SITE, ICON, NAV, CAR_MODELS, MOTO_MODELS, head, header, footer, page, pageBanner, vehicleCard, faqItem, FAQS, VEHICLES, PART_CATEGORIES, PARTS };
+module.exports = { ROOT, OUT_DIR, SITE, ICON, NAV, CAR_MODELS, MOTO_MODELS, head, header, footer, page, pageBanner, vehicleCard, faqItem, FAQS, VEHICLES, PART_CATEGORIES, PARTS };

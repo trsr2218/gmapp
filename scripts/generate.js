@@ -2,12 +2,15 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  ROOT, SITE, ICON, VEHICLES, PART_CATEGORIES, PARTS,
+  OUT_DIR, SITE, ICON, VEHICLES, PART_CATEGORIES, PARTS,
   page, pageBanner, vehicleCard, faqItem, FAQS,
 } = require('./build.js');
 
+fs.rmSync(OUT_DIR, { recursive: true, force: true });
+fs.mkdirSync(OUT_DIR, { recursive: true });
+
 const write = (rel, html) => {
-  const full = path.join(ROOT, rel);
+  const full = path.join(OUT_DIR, rel);
   fs.mkdirSync(path.dirname(full), { recursive: true });
   fs.writeFileSync(full, html);
   console.log('wrote', rel);

@@ -4,8 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const esbuild = require('esbuild');
-
-const ROOT = path.join(__dirname, '..');
+const { ROOT, OUT_DIR } = require('./build.js');
 
 const CSS = [{ src: 'css/style.css', out: 'css/style.min.css' }];
 const JS = [
@@ -15,19 +14,24 @@ const JS = [
 ];
 
 async function run() {
+  fs.mkdirSync(OUT_DIR, { recursive: true });
   for (const { src, out } of CSS) {
     const result = await esbuild.build({
       entryPoints: [path.join(ROOT, src)], write: false, minify: true, loader: { '.css': 'css' },
     });
-    fs.writeFileSync(path.join(ROOT, out), result.outputFiles[0].text);
-    console.log(`${src} -> ${out}`);
+    const dest = path.join(OUT_DIR, out);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, result.outputFiles[0].text);
+    console.log(`${src} -> dist/${out}`);
   }
   for (const { src, out } of JS) {
     const result = await esbuild.build({
       entryPoints: [path.join(ROOT, src)], write: false, minify: true, bundle: false, target: 'es2018',
     });
-    fs.writeFileSync(path.join(ROOT, out), result.outputFiles[0].text);
-    console.log(`${src} -> ${out}`);
+    const dest = path.join(OUT_DIR, out);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, result.outputFiles[0].text);
+    console.log(`${src} -> dist/${out}`);
   }
   console.log('\nDone.');
 }
