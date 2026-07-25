@@ -3,7 +3,7 @@ const VEHICLES = [
   {
     id: 'alto-k10', name: 'Suzuki Alto K10', category: ['car'], type: 'Hatchback',
     seats: 5, engine: '1,000cc K-Next', fuel: 'Petrol', economy: '~20 km/l',
-    img: '/assets/img/altok10-hd.png', thumb: '/assets/img/alto-k10.png',
+    img: '/assets/img/altok10-hd.webp', thumb: '/assets/img/alto-k10.webp',
     tag: 'New',
     blurb: 'A small car with a big personality. A lightweight yet powerful 1,000cc engine, manual or automatic.',
     description: 'The Alto K10 is a small car with a big personality. It features a lightweight yet powerful 1,000cc K-Next engine, available in manual and automatic transmission, and delivers approximately 20 km per litre, one of the most fuel-efficient options in its class in Zambia. Comfortable, spacious for its footprint, and easy to live with in city traffic.',
@@ -12,7 +12,7 @@ const VEHICLES = [
   {
     id: 'alto-800', name: 'Suzuki Alto 800', category: ['car'], type: 'Hatchback',
     seats: 5, engine: '800cc F8D', fuel: 'Petrol', economy: '~25 km/l',
-    img: '/assets/img/alto800-hd.png', thumb: '/assets/img/alto800.png',
+    img: '/assets/img/alto800-hd.webp', thumb: '/assets/img/alto800.webp',
     tag: 'New',
     blurb: "Zambia's favourite first car: economical, easy to park and famously reliable.",
     description: "The Suzuki Alto 800 is a strong and reliable vehicle perfect for family or corporate use. Despite its compact exterior, it offers surprisingly spacious interior room. Its 800cc F8D engine delivers approximately 25 km per litre, making it one of the most fuel-efficient city vehicles on the Zambian market.",
@@ -21,7 +21,7 @@ const VEHICLES = [
   {
     id: 's-presso', name: 'Maruti Suzuki S-Presso', category: ['car'], type: 'Crossover',
     seats: 5, engine: '1,000cc', fuel: 'Petrol', economy: 'Excellent',
-    img: '/assets/img/spresso.jpg', thumb: '/assets/img/spresso.jpg',
+    img: '/assets/img/spresso.webp', thumb: '/assets/img/spresso.webp',
     tag: 'New',
     blurb: 'A bold micro-SUV silhouette with commanding road presence and easy city manoeuvrability.',
     description: 'The S-Presso brings a bold, SUV-inspired stance to a compact footprint. Commanding road presence, a raised seating position and easy manoeuvrability make it a standout choice for drivers who want city-friendly proportions without giving up road presence.',
@@ -30,7 +30,7 @@ const VEHICLES = [
   {
     id: 'new-vitara', name: 'Suzuki Vitara', category: ['suv'], type: 'SUV',
     seats: 5, engine: 'ALLGrip 4x4', fuel: 'Petrol', economy: 'Good',
-    img: '/assets/img/vitara-hd.png', thumb: '/assets/img/vitara.png',
+    img: '/assets/img/vitara-hd.webp', thumb: '/assets/img/vitara.webp',
     tag: 'Popular',
     blurb: 'A rugged 4x4 with ALLGrip Technology, combining off-road capability with everyday usability.',
     description: "Suzuki pioneered the compact SUV, and the Vitara reinvents it again. A rugged 4x4 with the new state-of-the-art ALLGrip Technology, it combines genuine off-road capability with easy urban usability. Its muscular body and clamshell bonnet turn heads, while an extensive range of accessories and two-tone exterior colours let you make it your own.",
@@ -39,7 +39,7 @@ const VEHICLES = [
   {
     id: 'suzuki-ertiga', name: 'Suzuki Ertiga', category: ['car', 'suv'], type: 'MPV',
     seats: 7, engine: '1.4-litre', fuel: 'Petrol', economy: '~15 km/l',
-    img: '/assets/img/ertiga-hd.png', thumb: '/assets/img/ertiga.png',
+    img: '/assets/img/ertiga-hd.webp', thumb: '/assets/img/ertiga.webp',
     tag: 'New',
     blurb: 'A stylish, spacious Life Utility Vehicle built for growing households and business use.',
     description: 'The Ertiga is a Life Utility Vehicle designed to transform your life and the way you drive. An ergonomically engineered seven-seater with a powerful, responsive 1.4-litre engine, it delivers around 15 km per litre, the most fuel-efficient people-carrier in its class, suited to both family and commercial use.',
@@ -48,7 +48,7 @@ const VEHICLES = [
   {
     id: 'super-carry', name: 'Suzuki Super Carry', category: ['commercial'], type: 'Mini Truck',
     seats: 2, engine: 'Petrol/Diesel', fuel: 'Petrol/Diesel', economy: 'Low running costs',
-    img: '/assets/img/supercarry-hd.png', thumb: '/assets/img/super-carry.png',
+    img: '/assets/img/supercarry-hd.webp', thumb: '/assets/img/super-carry.webp',
     tag: 'Commercial',
     blurb: "A powerful mini truck, getting the job done since 1961, now in its 11th generation.",
     description: 'The Super Carry is a powerful mini truck that has been getting the job done since 1961. Now in its 11th generation, it combines low fuel consumption and running costs with Japanese reliability, a dependable choice for Zambian businesses that need to move goods every day.',
@@ -57,7 +57,7 @@ const VEHICLES = [
   {
     id: 'suzuki-dr-200se', name: 'Suzuki DR200SE', category: ['moto'], type: 'Trail Motorcycle',
     seats: 1, engine: '199cc single-cylinder', fuel: 'Petrol', economy: '13L tank',
-    img: '/assets/img/dr200se-hd.png', thumb: '/assets/img/dr200se.png',
+    img: '/assets/img/dr200se-hd.webp', thumb: '/assets/img/dr200se.webp',
     tag: 'New',
     blurb: 'A rugged, lightweight trail bike for comfort on the street and control off the beaten path.',
     description: 'The DR200SE is a single-cylinder, 199cc multi-purpose motorcycle built for both on- and off-road use. A lightweight body, electric starter, telescopic front forks and a 13-litre fuel tank combine comfort on the street with control off the beaten path, responsive handling and abundant torque for off-road enthusiasts and daily commuters alike.',
@@ -66,7 +66,7 @@ const VEHICLES = [
   {
     id: 'suzuki-en125-2a', name: 'Suzuki EN125-2A', category: ['moto'], type: 'Commuter Motorcycle',
     seats: 2, engine: '125cc', fuel: 'Petrol', economy: 'Excellent',
-    img: '/assets/img/en125.png', thumb: '/assets/img/en125.png',
+    img: '/assets/img/en125.webp', thumb: '/assets/img/en125.webp',
     tag: 'New',
     blurb: 'An economical, easy-to-ride commuter motorcycle for daily transport and light business use.',
     description: 'The EN125-2A is ideal for urban trips, with a 125cc engine built for reliability and robustness. It emphasises power, manoeuvrability and reduced fuel consumption, making it strong value for money as a daily commuter or light-business runabout.',
@@ -75,7 +75,7 @@ const VEHICLES = [
   {
     id: 'suzuki-en125-huz', name: 'Suzuki EN125-HUZ', category: ['moto'], type: 'Commuter Motorcycle',
     seats: 2, engine: '125cc', fuel: 'Petrol', economy: 'Excellent',
-    img: '/assets/img/en125-huz.png', thumb: '/assets/img/en125-huz.png',
+    img: '/assets/img/en125-huz.webp', thumb: '/assets/img/en125-huz.webp',
     tag: 'New',
     blurb: 'Ideal for urban trips: a 125cc engine built for reliability, robustness and strong value.',
     description: 'The EN125-HUZ shares the same dependable 125cc platform built for urban trips, emphasising reliability and robustness. Key attributes include power, manoeuvrability, reduced fuel consumption and strong value for money.',

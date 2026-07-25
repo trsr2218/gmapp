@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'gm-v1';
+const CACHE_VERSION = 'gm-v2';
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -13,10 +13,10 @@ const CORE_ASSETS = [
   '/contact.html',
   '/cart.html',
   '/offline.html',
-  '/css/style.css',
-  '/js/data.js',
-  '/js/shop.js',
-  '/js/app.js',
+  '/css/style.min.css',
+  '/js/data.min.js',
+  '/js/shop.min.js',
+  '/js/app.min.js',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png',

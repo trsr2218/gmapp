@@ -19,7 +19,7 @@ const featured = FEATURED_IDS.map((id) => VEHICLES.find((v) => v.id === id));
 
 const homeContent = `
 <section id="home" class="hero">
-  <div class="hero__bg" style="background-image:url('/assets/img/vitara-hero.jpg')" role="img" aria-label="Suzuki Vitara on an open road at sunset"></div>
+  <div class="hero__bg" style="background-image:url('/assets/img/vitara-hero.webp')" role="img" aria-label="Suzuki Vitara on an open road at sunset"></div>
   <div class="hero__scrim"></div>
   <div class="container hero__content">
     <div class="hero__badges">
@@ -77,7 +77,7 @@ const homeContent = `
 <section class="section">
   <div class="container about-grid">
     <div class="about-media reveal">
-      <img src="/assets/img/slide1.jpg" alt="Guardian Motors showroom forecourt in Lusaka, Zambia" loading="lazy" width="1200" height="800">
+      <img src="/assets/img/slide1.webp" alt="Guardian Motors showroom forecourt in Lusaka, Zambia" loading="lazy" width="1200" height="800">
       <div class="about-media__badge"><strong class="count-up" data-count="55" data-suffix="+">0</strong><span>Years serving<br>Zambian drivers</span></div>
     </div>
     <div class="about-copy reveal">
@@ -112,7 +112,7 @@ const homeContent = `
         <h3>Take Guardian Motors with you</h3>
         <p>Install the app for one-tap access to the showroom, service booking and parts requests, even with a weak signal. No app store needed.</p>
       </div>
-      <button id="installBtnBanner" class="btn btn--red" onclick="document.getElementById('installBtnHero').click()">${ICON.install} Install App</button>
+      <button id="installBtnBanner" class="btn btn--red">${ICON.install} Install App</button>
     </div>
   </div>
 </section>
@@ -126,7 +126,7 @@ write('index.html', page({
   content: homeContent,
   jsonLd: {
     '@context': 'https://schema.org', '@type': 'AutoDealer', name: 'Guardian Motors Limited',
-    image: `${SITE}/assets/img/vitara-hero.jpg`, url: SITE, telephone: '+260211228778',
+    image: `${SITE}/assets/img/vitara-hero.webp`, url: SITE, telephone: '+260211228778',
     foundingDate: '1969', brand: [{ '@type': 'Brand', name: 'Suzuki' }, { '@type': 'Brand', name: 'Maruti Suzuki' }],
     address: { '@type': 'PostalAddress', streetAddress: 'Emray House, Stand 6247, Kabelenga Road / Tuleteka Road', addressLocality: 'Lusaka', addressCountry: 'ZM' },
   },
@@ -271,7 +271,7 @@ ${pageBanner({ eyebrow: 'Workshop & Servicing', title: 'Manufacturer-standard ca
           <div class="field full"><label for="bkNotes">Notes for our service team</label><textarea id="bkNotes" name="notes" placeholder="Anything else we should know?"></textarea></div>
         </div>
         <button type="submit" class="btn btn--red btn--block" style="margin-top:22px;">Request Booking</button>
-        <p class="form-note">Submitting opens your email app with these details addressed to our Lusaka service desk. We'll confirm your slot by phone or email.</p>
+        <p class="form-note">Your request goes straight to our Lusaka service desk. We'll confirm your slot by phone or email.</p>
         <div class="form-success">${ICON.check}Thanks. Your request is ready to send.</div>
       </form>
     </div>
@@ -304,7 +304,7 @@ ${pageBanner({ eyebrow: 'Genuine Parts', title: 'Official genuine parts for ever
 <section class="section">
   <div class="container">
     <div class="parts-layout reveal">
-      <div class="parts-media"><img src="/assets/img/product-car.png" alt="Genuine Suzuki spare parts including engines, spark plugs and water pumps" loading="lazy" width="900" height="720"></div>
+      <div class="parts-media"><img src="/assets/img/product-car.webp" alt="Genuine Suzuki spare parts including engines, spark plugs and water pumps" loading="lazy" width="900" height="720"></div>
       <div class="parts-copy">
         <ul class="about-list">
           <li>${ICON.check}Engines, filters, brake components &amp; more</li>
@@ -359,7 +359,7 @@ ${pageBanner({ eyebrow: 'About Guardian Motors', title: 'A Zambian-owned name dr
 <section class="section">
   <div class="container about-grid">
     <div class="about-media reveal">
-      <img src="/assets/img/slide2.jpg" alt="Guardian Motors dealership in Lusaka, Zambia" loading="lazy" width="1200" height="800">
+      <img src="/assets/img/slide2.webp" alt="Guardian Motors dealership in Lusaka, Zambia" loading="lazy" width="1200" height="800">
       <div class="about-media__badge"><strong class="count-up" data-count="55" data-suffix="+">0</strong><span>Years serving<br>Zambian drivers</span></div>
     </div>
     <div class="about-copy reveal">
@@ -515,7 +515,7 @@ ${pageBanner({ eyebrow: 'Your Enquiry List', title: 'Enquiry cart & wishlist', d
             <div class="field full"><label for="ceNotes">Notes</label><textarea id="ceNotes" name="notes" placeholder="Anything else we should know?"></textarea></div>
           </div>
           <button type="submit" class="btn btn--red btn--block" style="margin-top:22px;">Send Enquiry List</button>
-          <p class="form-note">Opens your email app with every item in your list addressed to our sales desk.</p>
+          <p class="form-note">Sent straight to our sales desk with every item in your list.</p>
         </form>
       </div>
     </div>

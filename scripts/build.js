@@ -9,6 +9,11 @@ const { VEHICLES, PART_CATEGORIES, PARTS } = require('../js/data.js');
 const ROOT = path.join(__dirname, '..');
 const SITE = 'https://www.guardianmotors.co.zm';
 
+/* Google Analytics 4. Create a free GA4 property at https://analytics.google.com,
+   then replace this with your real Measurement ID (looks like "G-XXXXXXXXXX").
+   Leave the placeholder in place and no analytics script is emitted. */
+const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+
 /* ---------------------------------------------------------------- icons */
 const ICON = {
   shield: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.7 9 10 5.2-1.3 9-5 9-10V6l-9-4Z"/><path d="m9 12 2 2 4-4"/></svg>',
@@ -58,7 +63,7 @@ function head({ title, description, path: pagePath, jsonLd, ogImage }) {
 <meta property="og:site_name" content="Guardian Motors Limited">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
-<meta property="og:image" content="${SITE}${ogImage || '/assets/img/vitara-hero.jpg'}">
+<meta property="og:image" content="${SITE}${ogImage || '/assets/img/vitara-hero.webp'}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:locale" content="en_ZM">
 <meta name="twitter:card" content="summary_large_image">
@@ -76,8 +81,10 @@ function head({ title, description, path: pagePath, jsonLd, ogImage }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css">
-${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}`;
+<link rel="stylesheet" href="/css/style.min.css">
+${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
+${GA_MEASUREMENT_ID && !GA_MEASUREMENT_ID.includes('XXXX') ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');</script>` : ''}`;
 }
 
 /* ---------------------------------------------------------------- header/footer */
@@ -227,9 +234,9 @@ function footer() {
   </div>
 </div>
 
-<script src="/js/data.js"></script>
-<script src="/js/shop.js"></script>
-<script src="/js/app.js"></script>`;
+<script src="/js/data.min.js"></script>
+<script src="/js/shop.min.js"></script>
+<script src="/js/app.min.js"></script>`;
 }
 
 function page({ title, description, path: pagePath, active, content, jsonLd, ogImage, bodyId }) {

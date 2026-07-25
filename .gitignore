@@ -1,0 +1,5 @@
+node_modules/
+.vercel/
+assets/img/originals/
+*.log
+.DS_Store

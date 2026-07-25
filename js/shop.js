@@ -175,7 +175,7 @@
     if (totalEl) totalEl.textContent = cartCount();
   }
 
-  document.getElementById('cartEnquiryForm')?.addEventListener('submit', (e) => {
+  document.getElementById('cartEnquiryForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const cart = getCart();
     if (!cart.length) { if (window.gmToast) window.gmToast('Add at least one vehicle or part first.'); return; }
@@ -186,10 +186,35 @@
       const p = findPart(item.id); return p ? `Part: ${p.name} x${item.qty || 1} (fits ${p.compatible})` : '';
     }).filter(Boolean).join('\n');
     const data = new FormData(form);
-    const subject = encodeURIComponent(`Enquiry list from ${data.get('name') || 'website visitor'}`);
-    const body = encodeURIComponent(`Name: ${data.get('name')}\nPhone: ${data.get('phone')}\nEmail: ${data.get('email')}\n\nItems:\n${lines}\n\nNotes:\n${data.get('notes') || ''}`);
-    window.location.href = `mailto:sales@guardianmotors.co.zm?subject=${subject}&body=${body}`;
-    if (window.gmToast) window.gmToast('Opening your email app with your full enquiry list.');
+    const name = data.get('name') || 'website visitor';
+    const subject = `Enquiry list from ${name}`;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const accessKey = window.WEB3FORMS_KEYS?.sales;
+
+    if (!accessKey || accessKey.startsWith('YOUR_')) {
+      console.warn('[Guardian Motors] Web3Forms access key for "sales" is not configured yet; falling back to mailto. See js/app.js WEB3FORMS_KEYS.');
+      const body = encodeURIComponent(`Name: ${name}\nPhone: ${data.get('phone')}\nEmail: ${data.get('email')}\n\nItems:\n${lines}\n\nNotes:\n${data.get('notes') || ''}`);
+      window.location.href = `mailto:sales@guardianmotors.co.zm?subject=${encodeURIComponent(subject)}&body=${body}`;
+      if (window.gmToast) window.gmToast('Opening your email app with your full enquiry list.');
+      return;
+    }
+
+    data.set('items', lines);
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.originalText = submitBtn.textContent; submitBtn.textContent = 'Sending...'; }
+    try {
+      const result = await window.submitFormToWeb3Forms(data, accessKey, subject);
+      if (result.success) {
+        if (window.gmToast) window.gmToast('Thanks! Your enquiry list has been sent to Guardian Motors.');
+        form.reset();
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error('[Guardian Motors] Cart enquiry submission failed:', err);
+      if (window.gmToast) window.gmToast("Couldn't send automatically. Please call +260 211 228778 or WhatsApp us instead.");
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.originalText; }
+    }
   });
 
   /* ---------- Header live search ---------- */

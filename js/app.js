@@ -2,6 +2,32 @@
 (() => {
   'use strict';
 
+  /* ---------- Web3Forms (free serverless form backend, https://web3forms.com) ----------
+     Each key is free and tied to one destination inbox. To go live:
+       1. Visit https://web3forms.com, enter the destination email (e.g. sales@guardianmotors.co.zm)
+          and it emails you an access key instantly, no account/login needed.
+       2. Repeat for service@ and parts@ (or reuse one key for all three if you'd rather
+          route everything to a single inbox).
+       3. Paste each key below. Forms fall back to opening the visitor's email client
+         (the old mailto: behaviour) until a real key replaces the "YOUR_..." placeholder. */
+  const WEB3FORMS_KEYS = {
+    sales: 'YOUR_WEB3FORMS_ACCESS_KEY_SALES',
+    service: 'YOUR_WEB3FORMS_ACCESS_KEY_SERVICE',
+    parts: 'YOUR_WEB3FORMS_ACCESS_KEY_PARTS',
+  };
+  async function submitFormToWeb3Forms(formData, accessKey, subject) {
+    formData.set('access_key', accessKey);
+    formData.set('subject', subject);
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: formData,
+    });
+    return res.json();
+  }
+  window.WEB3FORMS_KEYS = WEB3FORMS_KEYS;
+  window.submitFormToWeb3Forms = submitFormToWeb3Forms;
+
   /* ---------- Header scroll state ---------- */
   const header = document.querySelector('.site-header');
   const onScroll = () => {
@@ -192,28 +218,52 @@
     filterFaq();
   }));
 
-  /* ---------- Forms: client-side validation + mailto handoff ---------- */
-  const wireForm = (formId, toEmail, subjectPrefix) => {
+  /* ---------- Forms: submit to Web3Forms (falls back to mailto until access keys are set, see WEB3FORMS_KEYS) ---------- */
+  const wireForm = (formId, toEmail, subjectPrefix, keyName) => {
     const form = document.getElementById(formId);
     if (!form) return;
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const data = new FormData(form);
-      const lines = [...data.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
-      const subject = encodeURIComponent(`${subjectPrefix}: ${data.get('name') || 'Website enquiry'}`);
-      const body = encodeURIComponent(lines);
+      const submitBtn = form.querySelector('button[type="submit"]');
       const success = form.querySelector('.form-success');
-      success?.classList.add('show');
-      showToast('Enquiry ready. Opening your email app to send it to Guardian Motors.');
-      window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
-      form.reset();
-      setTimeout(() => success?.classList.remove('show'), 6000);
+      const subject = `${subjectPrefix}: ${data.get('name') || 'Website enquiry'}`;
+
+      const accessKey = WEB3FORMS_KEYS[keyName];
+      if (!accessKey || accessKey.startsWith('YOUR_')) {
+        console.warn(`[Guardian Motors] Web3Forms access key for "${keyName}" is not configured yet; falling back to mailto. See js/app.js WEB3FORMS_KEYS.`);
+        const lines = [...data.entries()].map(([k, v]) => `${k}: ${v}`).join('\n');
+        window.location.href = `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines)}`;
+        success?.classList.add('show');
+        showToast('Enquiry ready. Opening your email app to send it to Guardian Motors.');
+        form.reset();
+        setTimeout(() => success?.classList.remove('show'), 6000);
+        return;
+      }
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.originalText = submitBtn.textContent; submitBtn.textContent = 'Sending...'; }
+      try {
+        const result = await submitFormToWeb3Forms(data, accessKey, subject);
+        if (result.success) {
+          success?.classList.add('show');
+          showToast('Thanks! Your request has been sent to Guardian Motors.');
+          form.reset();
+          setTimeout(() => success?.classList.remove('show'), 6000);
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
+      } catch (err) {
+        console.error('[Guardian Motors] Form submission failed:', err);
+        showToast(`Couldn't send automatically. Please call ${'+260 211 228778'} or WhatsApp us instead.`);
+      } finally {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.originalText; }
+      }
     });
   };
-  wireForm('bookingForm', 'service@guardianmotors.co.zm', 'Service Booking');
-  wireForm('partsForm', 'parts@guardianmotors.co.zm', 'Parts Order Request');
-  wireForm('contactForm', 'sales@guardianmotors.co.zm', 'Website Enquiry');
+  wireForm('bookingForm', 'service@guardianmotors.co.zm', 'Service Booking', 'service');
+  wireForm('partsForm', 'parts@guardianmotors.co.zm', 'Parts Order Request', 'parts');
+  wireForm('contactForm', 'sales@guardianmotors.co.zm', 'Website Enquiry', 'sales');
 
   /* ---------- Toast ---------- */
   const toastEl = document.getElementById('toast');
@@ -264,6 +314,7 @@
   };
   installBtn?.addEventListener('click', triggerInstall);
   installBtnHero?.addEventListener('click', triggerInstall);
+  document.getElementById('installBtnBanner')?.addEventListener('click', triggerInstall);
 
   document.getElementById('iosModalClose')?.addEventListener('click', () => {
     document.getElementById('iosModal')?.classList.remove('open');
